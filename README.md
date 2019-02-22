@@ -1,7 +1,5 @@
 # API
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5de6b501a4145d98faa122796d88543)](https://app.codacy.com/app/ik_2/API?utm_source=github.com&utm_medium=referral&utm_content=projectbank/API&utm_campaign=Badge_Grade_Dashboard)
-
 This API is meant to make it easier for all of the banks in the USSR to work together. An important part of this is a clear standard. To maintain this, we have developed a standard API.
 
 ## How to build for development purposes
