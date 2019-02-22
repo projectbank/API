@@ -18,9 +18,11 @@ CREATE TABLE `robinza202_bankapi`.`clients` (
 
     PRIMARY KEY (`id`), 
     UNIQUE (`nuid`), 
-    UNIQUE (`iban`)) 
-    ENGINE = InnoDB 
-    CHARSET=utf8 
-    COLLATE utf8_bin 
-    COMMENT = 'This table is meant to keep track of all the clients.';
+    UNIQUE (`iban`)
+) 
+
+ENGINE = InnoDB 
+CHARSET=utf8 
+COLLATE utf8_bin 
+COMMENT = 'This table is meant to keep track of all the clients.';
 ```
