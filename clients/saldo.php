@@ -38,7 +38,8 @@ if (isset($nuid)) { // There should be an NUID set
                         $response = array('error' => 'Nothing found.');
                     }
                 } else {
-                    // update attempts = attempts + 1
+                    $sql = "UPDATE clients SET pin_attempts = pin_attempts + 1 WHERE nuid='$nuid'";
+                    $conn->query($sql);
                     $response = array('error' => 'Wrong PIN.');
                 }
 
