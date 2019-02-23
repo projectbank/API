@@ -119,10 +119,10 @@ class Client
                 $sql = "UPDATE clients SET saldo = saldo + '$amount' WHERE iban = '$recipient'";
                 $this->conn->query($sql);
             } else {
-                $response = 0;
+                $response = -1;
             }
         } else {
-            $response = 0;
+            $response = -2;
         }
         return $response;
     }
