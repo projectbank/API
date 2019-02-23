@@ -26,21 +26,24 @@ if (isset($nuid)) { // There should be an NUID set
                 $pinHashed = md5($pin);
 
                 // Everything seems alright, we can look up the saldo of the user
-                $sql = "SELECT saldo, pin FROM clients WHERE nuid = '$nuid'";
+                $sql = "SELECT saldo, pin, pin_attempts FROM clients WHERE nuid = '$nuid'";
                 $result = $conn->query($sql);
                 $obj = $result->fetch_object();
 
-                if ($obj->pin == $pinHashed) {
-                    // Check if there was something found
-                    if ($obj->saldo != null) {
-                        $response = array('saldo' => $obj->saldo); // Return the saldo
+                if ($obj != null) {
+                    if ($obj->pin_attempts < 3) {
+                        if ($obj->pin == $pinHashed) {
+                            $response = array('saldo' => $obj->saldo); // Return the saldo
+                        } else {
+                            $sql = "UPDATE clients SET pin_attempts = pin_attempts + 1 WHERE nuid='$nuid'";
+                            $conn->query($sql);
+                            $response = array('error' => 'Wrong PIN.');
+                        }
                     } else {
-                        $response = array('error' => 'Nothing found.');
+                        $response = array('error' => 'Pin was entered wrong too many times.');
                     }
                 } else {
-                    $sql = "UPDATE clients SET pin_attempts = pin_attempts + 1 WHERE nuid='$nuid'";
-                    $conn->query($sql);
-                    $response = array('error' => 'Wrong PIN.');
+                    $response = array('error' => 'No client found.');
                 }
 
             } else {
