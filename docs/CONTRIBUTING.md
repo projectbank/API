@@ -18,7 +18,7 @@ Thank you in advance for your detailed report! This makes our work so much easie
 It is so awesome that you have written code! Of course we love to merge your code into our repository. However, to do this, there are a few requirements that have to be met. Please make sure of the following:
 
 1. **Your code has to be documented.** We are very sorry, but we are not going to merge code that can't be maintained easily.
-2. **Your code has to add something to the API.** If you code only does not add something useful, we will not add it. This would make the codebase unnecessarily long.
+2. **Your code has to add something to the API.** If your code does not add something useful, we will not add it. This would make the codebase unnecessarily long.
 3. **If you've worked on an issue, please note.** It would be best if you would reference the issue number in one of your commits, because that automatically links the issue and your PR. If you haven't done that, please at least name the issue that you have worked on.
 4. **Label your PR.** This one can be done easily. Just label what you have done: fixed a bug, added a new function, etc.
 
