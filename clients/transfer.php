@@ -29,6 +29,12 @@ if (isset($recipient)) {
     $response = $client->transfer($amount);
 }
 
-echo json_encode(array('saldo' => $response));
+if ($response >= 0) {
+    echo json_encode(array('saldo' => $response));
+} else if ($response == -1) {
+    echo json_encode(array('error' => 'The recipient does not exist.'));
+} else if ($response == -2) {
+    echo json_encode(array('error' => 'You do not have enough balance.'));
+}
 
 ?>
