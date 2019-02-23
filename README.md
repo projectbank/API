@@ -6,7 +6,7 @@ This API is meant to make it easier for all of the banks in the USSR to work tog
 
 ### Create the database `clients`
 ```sql
-CREATE TABLE `robinza202_bankapi`.`clients` ( 
+CREATE TABLE `bankapi`.`clients` ( 
     `id` INT NOT NULL AUTO_INCREMENT , 
     `nuid` VARCHAR(8) NOT NULL , 
     `iban` VARCHAR(14) NOT NULL , 
@@ -30,7 +30,7 @@ COMMENT = 'This table is meant to keep track of all the clients.';
 ### Create the database `transactions`
 
 ```sql
-CREATE TABLE `robinza202_bankapi`.`transactions` ( 
+CREATE TABLE `bankapi`.`transactions` ( 
     `id` INT NOT NULL AUTO_INCREMENT , 
     `iban_sender` VARCHAR(14) NOT NULL , 
     `iban_recipient` VARCHAR(14) NOT NULL , 
