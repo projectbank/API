@@ -89,7 +89,7 @@ class Client
         return $response;
     }
 
-    public function transfer($amount, $recipient): int
+    public function transfer($amount, $recipient="00000000000000"): int
     {
         /* Determine current saldo */
         $saldo = $this->checkSaldo();
