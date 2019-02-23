@@ -88,4 +88,28 @@ class Client
 
         return $response;
     }
+
+    public function transfer($amount, $recipient): int
+    {
+        /* Determine current saldo */
+        $saldo = $this->checkSaldo();
+        if ($amount <= $saldo) {
+            /* Update the saldo of `clients` */
+            $newSaldo = $saldo - $amount; 
+            $sql = "UPDATE clients SET saldo = '$newSaldo' WHERE nuid = '$this->nuid'";
+            $this->conn->query($sql);
+
+            /* Insert the transaction in the database */
+            $sql = "SELECT iban FROM clients WHERE nuid = '$this->nuid'";
+            $result = $this->conn->query($sql);
+            $obj = $result->fetch_object();
+
+            $sql = "INSERT INTO transactions (iban_sender, iban_recipient, amount) VALUES ('$obj->iban', '$recipient', '$amount')";
+            $this->conn->query($sql);
+            $response = $newSaldo;
+        } else {
+            $response = 0;
+        }
+        return $response;
+    }
 }
