@@ -89,24 +89,38 @@ class Client
         return $response;
     }
 
-    public function transfer($amount, $recipient="00000000000000"): int
+    public function transfer($amount, $recipient = "00000000000000"): int
     {
         /* Determine current saldo */
         $saldo = $this->checkSaldo();
         if ($amount <= $saldo) {
             /* Update the saldo of `clients` */
-            $newSaldo = $saldo - $amount; 
+            $newSaldo = $saldo - $amount;
             $sql = "UPDATE clients SET saldo = '$newSaldo' WHERE nuid = '$this->nuid'";
             $this->conn->query($sql);
 
-            /* Insert the transaction in the database */
-            $sql = "SELECT iban FROM clients WHERE nuid = '$this->nuid'";
+            /* Check if the recipient exists */
+            $sql = "SELECT iban FROM clients WHERE iban = '$recipient'";
             $result = $this->conn->query($sql);
             $obj = $result->fetch_object();
 
-            $sql = "INSERT INTO transactions (iban_sender, iban_recipient, amount) VALUES ('$obj->iban', '$recipient', '$amount')";
-            $this->conn->query($sql);
-            $response = $newSaldo;
+            if ($obj != null) {
+                /* Insert the transaction in the database */
+                $sql = "SELECT iban FROM clients WHERE nuid = '$this->nuid'";
+
+                $result = $this->conn->query($sql);
+                $obj = $result->fetch_object();
+
+                $sql = "INSERT INTO transactions (iban_sender, iban_recipient, amount) VALUES ('$obj->iban', '$recipient', '$amount')";
+                $this->conn->query($sql);
+                $response = $newSaldo;
+
+                /* Add the money to the account of the recipient */
+                $sql = "UPDATE clients SET saldo = saldo + '$amount' WHERE iban = '$recipient'";
+                $this->conn->query($sql);
+            } else {
+                $response = 0;
+            }
         } else {
             $response = 0;
         }
