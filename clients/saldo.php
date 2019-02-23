@@ -21,6 +21,8 @@ $client = new Client($nuid, $pin);
 
 $response = $client->checkSaldo();
 
-echo json_encode(array('saldo' => $response));
-
-?>
+if (!$response) {
+    echo json_encode(array('error' => 'Could not log in.'));
+} else {
+    echo json_encode(array('saldo' => $response));
+}

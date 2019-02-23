@@ -70,7 +70,7 @@ class Client
         return $response;
     }
 
-    public function checkSaldo(): int
+    public function checkSaldo()
     {
         if ($this->checkLogin() == 0) {
             /* Create a query to select all of the necessary data from the database */
@@ -83,7 +83,7 @@ class Client
             $response = $obj->saldo;
         } else {
             /* It is the responsibility of the bank to check whether the credentials are correct */
-            $response = 0;
+            $response = null;
         }
 
         return $response;
