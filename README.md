@@ -26,3 +26,22 @@ CHARSET=utf8
 COLLATE utf8_bin 
 COMMENT = 'This table is meant to keep track of all the clients.';
 ```
+
+### Create the database `transactions`
+
+```sql
+CREATE TABLE `robinza202_bankapi`.`transactions` ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `iban_sender` VARCHAR(14) NOT NULL , 
+    `iban_recipient` VARCHAR(14) NOT NULL , 
+    `amount` INT NOT NULL , 
+    `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    
+    PRIMARY KEY (`id`)
+) 
+
+ENGINE = InnoDB 
+CHARSET=utf8 
+COLLATE utf8_bin 
+COMMENT = 'This table is meant to keep track of all the transactions.';
+```
