@@ -17,11 +17,17 @@ This will be done for each specific case, so we can return specific error codes.
 $nuid = str_replace(' ', '', htmlspecialchars($_GET['nuid']));
 $pin = str_replace(' ', '', htmlspecialchars($_GET['pin']));
 $amount = str_replace(' ', '', htmlspecialchars($_GET['amount']));
-$recipient = str_replace(' ', '', htmlspecialchars($_GET['recipient']));
+if (isset($_GET['recipient'])) {
+    $recipient = str_replace(' ', '', htmlspecialchars($_GET['recipient']));
+}
 
 $client = new Client($nuid, $pin);
 
-$response = $client->transfer($amount, $recipient);
+if (isset($recipient)) {
+    $response = $client->transfer($amount, $recipient);
+} else {
+    $response = $client->transfer($amount);
+}
 
 echo json_encode(array('saldo' => $response));
 
