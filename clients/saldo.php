@@ -2,9 +2,6 @@
 
 header('Content-Type: application/json');
 
-/* Include Client class */
-require_once('client.php');
-
 /*
 To sanitize the input, we:
 
