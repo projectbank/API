@@ -2,9 +2,6 @@
 
 header('Content-Type: application/json');
 
-/* Include Client class */
-require_once('client.php');
-
 /*
 To sanitize the input, we:
 
@@ -20,8 +17,8 @@ $pin = str_replace(' ', '', htmlspecialchars($_GET['pin']));
 
 $client = new Client($nuid, $pin);
 
-$response = $client->checkSaldo();
+$response = $client->checkLogin();
 
-echo json_encode(array('saldo' => $response));
+echo json_encode(array('status' => $response));
 
 ?>
