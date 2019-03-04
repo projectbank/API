@@ -14,8 +14,8 @@ After we have done that, we will check if all of the requirements are met.
 This will be done for each specific case, so we can return specific error codes.
  */
 
-$nuid = str_replace(' ', '', htmlspecialchars($_GET['nuid']));
-$pin = str_replace(' ', '', htmlspecialchars($_GET['pin']));
+$nuid = str_replace(' ', '', htmlspecialchars($_POST['nuid']));
+$pin = str_replace(' ', '', htmlspecialchars($_POST['pin']));
 
 $client = new Client($nuid, $pin);
 
