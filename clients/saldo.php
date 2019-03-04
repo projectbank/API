@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 
 require_once 'client.php';
 
-$nuid = str_replace(' ', '', htmlspecialchars($_GET['nuid']));
-$pin = str_replace(' ', '', htmlspecialchars($_GET['pin']));
+$nuid = str_replace(' ', '', htmlspecialchars($_POST['nuid']));
+$pin = str_replace(' ', '', htmlspecialchars($_POST['pin']));
 
 $client = new Client($nuid, $pin);
 
