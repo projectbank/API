@@ -4,11 +4,11 @@ header('Content-Type: application/json');
 
 require_once 'client.php';
 
-$nuid = str_replace(' ', '', htmlspecialchars($_GET['nuid']));
-$pin = str_replace(' ', '', htmlspecialchars($_GET['pin']));
-$amount = str_replace(' ', '', htmlspecialchars($_GET['amount']));
-if (isset($_GET['recipient'])) {
-    $recipient = str_replace(' ', '', htmlspecialchars($_GET['recipient']));
+$nuid = str_replace(' ', '', htmlspecialchars($_POST['nuid']));
+$pin = str_replace(' ', '', htmlspecialchars($_POST['pin']));
+$amount = str_replace(' ', '', htmlspecialchars($_POST['amount']));
+if (isset($_POST['recipient'])) {
+    $recipient = str_replace(' ', '', htmlspecialchars($_POST['recipient']));
 }
 
 $client = new Client($nuid, $pin);
