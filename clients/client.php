@@ -17,15 +17,14 @@ class Client
     {
         $response = false;
 
-        if (isset($this->nuid)) {
-            if (isset($this->pin)) {
-                if (strlen($this->pin) === 4) {
-                    if (strlen($this->nuid) === 8) {
-                        $response = true;
-                    }
-                }
-            }
+        if (isset($this->nuid) &&
+            isset($this->pin) &&
+            strlen($this->pin) === 4 &&
+            strlen($this->nuid) == 8)
+        {
+            $response = true;
         }
+
         return $response;
     }
 
