@@ -20,7 +20,8 @@ class Client
         if (isset($this->nuid) &&
             isset($this->pin) &&
             strlen($this->pin) === 4 &&
-            strlen($this->nuid) == 8)
+            strlen($this->nuid) == 8 &&
+            isset($_SERVER['HTTPS']))
         {
             $response = true;
         }
