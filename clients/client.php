@@ -32,28 +32,33 @@ class Client
     public function checkLogin(): int
     {
         /* There are 3 possible return values here:
-        0. The user credentials are OK
-        1. The user credentials are wrong
-        2. The user has entered his PIN wrong 3 times
-         */
+          0. The user credentials are OK
+          1. The user credentials are wrong
+          2. The user has entered his PIN wrong 3 times
+          3. The validation failed
+        */
 
-        $sql = "SELECT saldo, pin, pin_attempts FROM clients WHERE nuid = '$this->nuid'";
+        if ($this->validateCredentials()) {
+          $sql = "SELECT saldo, pin, pin_attempts FROM clients WHERE nuid = '$this->nuid'";
 
-        $result = $this->conn->query($sql);
-        $obj = $result->fetch_object();
+          $result = $this->conn->query($sql);
+          $obj = $result->fetch_object();
 
-        if ($obj->pin_attempts < 3) {
-            if ($obj->pin == $this->pin) {
-                $sql = "UPDATE clients SET pin_attempts = 0 WHERE nuid='$this->nuid'";
-                $this->conn->query($sql);
-                $response = 0;
-            } else {
-                $sql = "UPDATE clients SET pin_attempts = pin_attempts + 1 WHERE nuid='$this->nuid'";
-                $this->conn->query($sql);
-                $response = 1;
-            }
+          if ($obj->pin_attempts < 3) {
+              if ($obj->pin == $this->pin) {
+                  $sql = "UPDATE clients SET pin_attempts = 0 WHERE nuid='$this->nuid'";
+                  $this->conn->query($sql);
+                  $response = 0;
+              } else {
+                  $sql = "UPDATE clients SET pin_attempts = pin_attempts + 1 WHERE nuid='$this->nuid'";
+                  $this->conn->query($sql);
+                  $response = 1;
+              }
+          } else {
+              $response = 2;
+          }
         } else {
-            $response = 2;
+            $response = 3;
         }
 
         return $response;
