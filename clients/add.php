@@ -9,7 +9,7 @@ $pin = str_replace(' ', '', htmlspecialchars($_POST['pin']));
 $name = htmlspecialchars($_POST['name']);
 
 /*
-It is no accidence that this page does not use client.php.
+It is no accident that this page does not use client.php.
 That is because of all of the validation.
 You are still free to refactor it, however.
 */
